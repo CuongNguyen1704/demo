@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="conterner">
+        <button onclick="next()">Next</button>
+        <button onclick="back()">Back</button>
+        <img src="./img/1.jpg" alt="" id="img" width="400px" height="300px">
+
+    </div>
+    <h1>Doi mat khau</h1>
+    <form action="">
+        Ten dang nhap <input type="text" id="tendn"> <span></span> <br>
+        Nhap mat khau cu <input type="text" id="mkcu"> <span></span> <br>
+        Nhap mat khau moi <input type="text" id="mkmoi"> <span></span> <br>
+        Nhap lai mat khau moi <input type="text" id="laimk"> <span></span> <br>
+
+        <button type="button" onclick="mk()">Doi mat khau</button>
+
+    </form>
+    <script>
+        let array = [
+            "img/1.jpg",
+            "img/2.jpg",
+            "img/3.jpg",
+            "img/4.jpg",
+            "img/5.jpg",
+        ];
+        let i =0;
+        let a = document.getElementById("img")
+
+        function next(){
+            if(i== array.length -1){
+                i =0
+            }
+            else{
+                i ++
+            }
+            a.src = array[i]
+        }
+        setInterval(next,1000)
+        function back(){
+            if(i>0){
+                i = i -1
+            }
+            else{
+                i = array.length -1
+            }
+            a.src = array[i]
+        }
+        let dn = document.getElementById("tendn")
+        let mkcu1 = document.getElementById("mkcu")
+        let mkmoi1 = document.getElementById("mkmoi")
+        let mklai = document.getElementById("laimk")
+        let sp = document.querySelectorAll("span")
+        function mk(){
+            if(dn.value == ""){
+                sp[0].innerHTML = "Ban chua nhap ten dang nhap"
+            }
+            else{
+                sp[0].innerHTML = ""
+            }
+            if(mkcu1.value == ""){
+                sp[1].innerHTML = "Moi nhap mat khau cu"
+            }
+            else if(mkcu1.value !== "Abc@123hehe"){
+                sp[1].innerHTML = "Mat khau cu sai"
+            }
+            else{
+                sp[1].innerHTML = ""
+            }
+            let q = /[A-Z]/
+            let s = /[0-9]/
+            if(mkmoi1.value == ""){
+                sp[2].innerHTML = "Moi nhap mk moi"
+            }
+            else if(mkmoi1.value.length <8){
+                sp[2].innerHTML = "Mk moi phai it nhat 8 ki tu "
+            }
+            else if(s.test(mkmoi1.value) == false){
+                sp[2].innerHTML = "Mk moi phai co it nhat 1 so"
+            }
+             
+            else if(q.test(mkmoi1.value) == false){
+                sp[2].innerHTML = "Mk moi phai co 1 ki tu hoa"
+            }
+            else{
+                sp[2].innerHTML = ""
+            }
+            if(mklai.value == ""){
+                sp[3].innerHTML  = "Moi nhap mk moi lai"
+            }
+            else if(mklai.value !== mkmoi1.value){
+                sp[3].innerHTML = "Mk moi va mk nhap lai moi phai trung nhau"
+            }
+            else{
+                sp[3].innerHTML = ""
+            }
+        }
+    </script>
+</body>
+</html>
